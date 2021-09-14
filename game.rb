@@ -16,13 +16,24 @@ class Game
     @@player2 = Player.new(input2.get_input(), LIVES)
     input2.response()
 
-    change_lives()
-    puts @@player1.lives
-    puts @@player2.lives
+    game_start()
   end
 
-  def change_lives
+  def minus_life
     @@player1.lives -= 1
   end
-  
+
+  def generate_question()
+    a = Random.new.rand(1..20)
+    b = Random.new.rand(1..20)
+    puts "What is #{a} + #{b}?"
+    answer = a + b
+  end  
+
+  def game_start
+    while @@player1.lives >= 1 && @@player2.lives >= 1
+      generate_question()
+      minus_life()
+    end  
+  end
 end
